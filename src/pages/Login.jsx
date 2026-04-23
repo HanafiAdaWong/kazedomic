@@ -11,7 +11,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const { signIn, signUp, signInWithGoogle } = useAuth();
+  const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -120,19 +120,6 @@ const Login = () => {
             {submitting ? 'Memproses...' : (isLogin ? 'Masuk' : 'Daftar')}
           </button>
         </form>
-
-        <div className="auth-divider">
-          <span>atau</span>
-        </div>
-
-        <button 
-          className="google-btn" 
-          onClick={() => signInWithGoogle()}
-          disabled={submitting}
-        >
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
-          {isLogin ? 'Masuk dengan Google' : 'Daftar dengan Google'}
-        </button>
       </div>
     </div>
   );
