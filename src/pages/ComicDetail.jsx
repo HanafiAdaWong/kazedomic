@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { api, GENRE_MAP } from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
-import { List, Calendar, User, Eye, Info, BookMarked } from 'lucide-react';
+import { useHistory } from '../contexts/HistoryContext';
+import { List, Calendar, User, Eye, Info } from 'lucide-react';
 import './ComicDetail.css';
-import '../pages/Library.css';
 
 const ComicDetail = () => {
   const { slug } = useParams();
   const [comic, setComic] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const { user, addBookmark, removeBookmark, isBookmarked: checkBookmark } = useAuth();
   const navigate = useNavigate();
+  const { addToHistory } = useHistory();
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -30,33 +28,15 @@ const ComicDetail = () => {
   }, [slug]);
 
   useEffect(() => {
-    const checkBm = async () => {
-      if (user && slug) {
-        const result = await checkBookmark(slug);
-        setIsBookmarked(result);
-      }
-    };
-    checkBm();
-  }, [user, slug]);
-
-  const handleBookmark = async () => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
-    if (isBookmarked) {
-      await removeBookmark(slug);
-      setIsBookmarked(false);
-    } else {
-      await addBookmark({
-        slug: comic.slug || slug,
+    if (comic) {
+      addToHistory({
+        slug: slug,
         title: comic.title,
         image: comic.image,
-        latest_chapter: comic.chapters?.[0]?.title || ''
+        latest_chapter: comic.chapters?.[0]?.title || 'Latest'
       });
-      setIsBookmarked(true);
     }
-  };
+  }, [comic]);
 
   if (loading) return <div className="loading">Memuat detail...</div>;
   if (!comic) return <div className="error">Manga tidak ditemukan.</div>;
@@ -78,13 +58,6 @@ const ComicDetail = () => {
           {comic.chapters?.[0] && (
             <Link to={`/chapter/${comic.chapters[0].slug}`} className="read-now-btn" style={{ textAlign: 'center' }}>Mulai Baca</Link>
           )}
-          <button 
-            className={`bookmark-btn ${isBookmarked ? 'bookmarked' : ''}`}
-            onClick={handleBookmark}
-          >
-            <BookMarked size={18} />
-            {isBookmarked ? 'Tersimpan' : 'Simpan ke Pustaka'}
-          </button>
         </div>
         
         <div className="detail-info">

@@ -7,8 +7,7 @@ Website baca manga modern yang dibangun dengan React, Vite, dan Supabase.
 - 🎨 **Desain Premium**: Tampilan dark mode yang elegan dan responsif.
 - ⚡ **Hero Carousel**: Menampilkan manga populer yang sedang tren.
 - 🔍 **Genre & Search**: Cari manga berdasarkan judul atau genre dengan mudah.
-- 🔐 **Sistem Auth**: Login menggunakan Email dan Password via Supabase.
-- 📚 **Pustaka Saya**: Simpan manga favorit Anda ke dalam koleksi pribadi.
+- 🚀 **Tanpa Login**: Akses penuh ke semua fitur tanpa perlu mendaftar atau masuk.
 
 ## Teknologi
 - **Frontend**: React.js, Vite, Vanilla CSS.
