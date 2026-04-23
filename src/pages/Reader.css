@@ -1,0 +1,117 @@
+.reader-page {
+  background: black;
+  min-height: 100vh;
+  margin: -2rem -1.5rem; /* Offset the container padding */
+}
+
+.reader-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 100;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  border-bottom: 1px solid var(--border);
+}
+
+.reader-nav.active {
+  transform: translateY(0);
+}
+
+.nav-wrap, .footer-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.chapter-info {
+  text-align: center;
+}
+
+.ch-title {
+  font-size: 1rem;
+  color: var(--text-main);
+  text-transform: capitalize;
+}
+
+.nav-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.images-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.images-container img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+.reader-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  border-top: 1px solid var(--border);
+}
+
+.reader-footer.active {
+  transform: translateY(0);
+}
+
+.page-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.page-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.reader-progress {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .images-container {
+    max-width: 100%;
+  }
+}
