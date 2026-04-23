@@ -1,16 +1,22 @@
-# React + Vite
+# Kazedomic 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website baca manga modern yang dibangun dengan React, Vite, dan Supabase.
 
-Currently, two official plugins are available:
+## Fitur Utama
+- 📖 **Baca Manga**: Koleksi manga lengkap dari API Komikstation.
+- 🎨 **Desain Premium**: Tampilan dark mode yang elegan dan responsif.
+- ⚡ **Hero Carousel**: Menampilkan manga populer yang sedang tren.
+- 🔍 **Genre & Search**: Cari manga berdasarkan judul atau genre dengan mudah.
+- 🔐 **Sistem Auth**: Login menggunakan Email atau Akun Google via Supabase.
+- 📚 **Pustaka Saya**: Simpan manga favorit Anda ke dalam koleksi pribadi.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Teknologi
+- **Frontend**: React.js, Vite, Vanilla CSS.
+- **Backend/DB**: Supabase (Auth & Database).
+- **Icons**: Lucide React.
+- **API**: Komikstation API.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Cara Menjalankan Lokal
+1. Clone repositori ini.
+2. Jalankan `npm install`.
+3. Jalankan `npm run dev`.
