@@ -19,7 +19,7 @@
 .detail-cover {
   width: 100%;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid var(--border);
 }
 
@@ -156,6 +156,25 @@
   padding-right: 1rem;
 }
 
+.chapter-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chapter-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.chapter-list::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.5);
+  /* Primary color with transparency */
+  border-radius: 4px;
+}
+
+.chapter-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
 .chapter-item {
   display: flex;
   justify-content: space-between;
@@ -192,15 +211,15 @@
     align-items: center;
     text-align: center;
   }
-  
+
   .meta-grid {
     justify-content: center;
   }
-  
+
   .genres {
     justify-content: center;
   }
-  
+
   .chapter-list {
     grid-template-columns: 1fr;
   }

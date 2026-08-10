@@ -12,20 +12,23 @@ const Footer = () => {
           </div>
           <p>Destinasi utama bagi pecinta manga, manhwa, dan manhua. Rasakan pengalaman membaca terbaik dengan antarmuka premium kami.</p>
           <div className="social-links">
-            <a href="#"><Globe size={20} /></a>
-            <a href="#"><MessageSquare size={20} /></a>
-            <a href="#"><Mail size={20} /></a>
+            <a href="https://www.tiktok.com/@kazeserenity" target="_blank" rel="noopener noreferrer">
+              <img src="https://ik.imagekit.io/lhtvft4ai/tiktok.png" alt="TikTok" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+            </a>
+            <a href="https://www.instagram.com/kaze_serenity_indo/" target="_blank" rel="noopener noreferrer">
+              <img src="https://ik.imagekit.io/lhtvft4ai/instagram.png" alt="Instagram" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+            </a>
           </div>
         </div>
-        
+
         <div className="footer-links" style={{ display: 'flex', alignItems: 'center' }}>
-          <a 
-            href="https://discord.gg/w9B7Kg3GEf" 
-            target="_blank" 
+          <a
+            href="https://discord.gg/w9B7Kg3GEf"
+            target="_blank"
             rel="noopener noreferrer"
             className="discord-btn"
           >
-            <MessageSquare size={20} />
+            <img src="https://ik.imagekit.io/lhtvft4ai/discord.png" alt="Discord" style={{ width: '24px', height: '24px', objectFit: 'contain', marginRight: '4px' }} />
             Join Discord Kaze Serenity
           </a>
         </div>

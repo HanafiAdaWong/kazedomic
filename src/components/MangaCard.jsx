@@ -1,42 +1,42 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, BookOpen } from 'lucide-react';
-import { api } from '../services/api';
 import './MangaCard.css';
 
+// Final placehold fallback — always works, no external dependency
+const makePlaceholder = (title) =>
+  `https://placehold.co/400x600/0f172a/3b82f6?text=${encodeURIComponent((title || 'Manga').slice(0, 20))}`;
+
+const isValidSrc = (url) =>
+  url && typeof url === 'string' && url.startsWith('http') && !url.includes('wsrv.nl');
+
 const MangaCard = ({ manga }) => {
-  const [imgSrc, setImgSrc] = useState(manga.image);
-  const [hasTriedRecovery, setHasTriedRecovery] = useState(false);
+  const initialSrc = isValidSrc(manga.image) ? manga.image : makePlaceholder(manga.title);
+  const [imgSrc, setImgSrc] = useState(initialSrc);
+  const [errorCount, setErrorCount] = useState(0);
 
   useEffect(() => {
-    setImgSrc(manga.image);
-    setHasTriedRecovery(false);
-  }, [manga.image]);
+    const src = isValidSrc(manga.image) ? manga.image : makePlaceholder(manga.title);
+    setImgSrc(src);
+    setErrorCount(0);
+  }, [manga.image, manga.slug, manga.title]);
 
-  const handleError = async () => {
-    if (!hasTriedRecovery && manga.slug) {
-      setHasTriedRecovery(true);
-      try {
-        const detail = await api.getComicDetail(manga.slug);
-        if (detail && detail.image && !detail.image.includes('placehold.co')) {
-          setImgSrc(detail.image);
-          return;
-        }
-      } catch (e) {
-        console.warn('Image recovery failed:', e);
-      }
+  const handleError = () => {
+    console.warn('[MangaCard] Image failed:', imgSrc, '| slug:', manga.slug);
+    // On first error, fall back to placehold immediately — no infinite loop
+    setErrorCount(prev => prev + 1);
+    if (errorCount < 1) {
+      setImgSrc(makePlaceholder(manga.title));
     }
-    
-    // Final fallback
-    setImgSrc(`https://placehold.co/400x600/121217/e2e8f0?text=${encodeURIComponent(manga.title)}`);
+    // If even placehold fails (very unlikely), do nothing more
   };
 
   return (
     <Link to={`/comic/${manga.slug}`} className="manga-card animate-fade-in">
       <div className="card-image">
-        <img 
-          src={imgSrc} 
-          alt={manga.title} 
+        <img
+          src={imgSrc}
+          alt={manga.title}
           loading="lazy"
           referrerPolicy="no-referrer"
           onError={handleError}
@@ -59,9 +59,9 @@ const MangaCard = ({ manga }) => {
         <h3 className="card-title">{manga.title}</h3>
         {manga.latest_chapter && (
           <p className="card-chapter">
-            {manga.latest_chapter.toString().toLowerCase().includes('chapter') || 
-             manga.latest_chapter.toString().toLowerCase().startsWith('ch') 
-              ? manga.latest_chapter 
+            {manga.latest_chapter.toString().toLowerCase().includes('chapter') ||
+              manga.latest_chapter.toString().toLowerCase().startsWith('ch')
+              ? manga.latest_chapter
               : `Chapter ${manga.latest_chapter}`}
           </p>
         )}
