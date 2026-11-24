@@ -50,15 +50,37 @@ const normalizeManga = (m) => {
 
 export const api = {
   getHome: async () => {
+    let rawList = [];
+
     try {
       const response = await fetch(`${BASE_URL}/home`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const result = await response.json();
 
-      const rawList = Array.isArray(result.data)
+      const homeData = result.data;
+      rawList = Array.isArray(homeData)
         ? result.data
-        : (result.data?.latest || result.data?.popular || []);
+        : (homeData?.latest?.length
+          ? homeData.latest
+          : homeData?.recommended?.length
+            ? homeData.recommended
+            : homeData?.popular || []);
+    } catch (error) {
+      console.warn('Failed to fetch home data from Shinigami API:', error);
+    }
 
+    if (rawList.length === 0) {
+      try {
+        const response = await fetch(`${BASE_URL}/list?page=1`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        rawList = Array.isArray(result.data) ? result.data : [];
+      } catch (error) {
+        console.error('Failed to load fallback manga list from Shinigami API:', error);
+      }
+    }
+
+    try {
       const normalized = rawList.map(normalizeManga).filter(Boolean);
 
       return {
@@ -67,7 +89,7 @@ export const api = {
         popular: normalized.slice(0, 6)
       };
     } catch (error) {
-      console.error('Failed to fetch home data from Shinigami API:', error);
+      console.error('Failed to normalize home data from Shinigami API:', error);
       return { trending: [], latest: [], popular: [] };
     }
   },
